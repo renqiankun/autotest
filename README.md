@@ -2,13 +2,14 @@
 
 ##### 版本
       node：18.14.0
-      python 3.7
-      visual studio 2022 安装需选中c++桌面开发
+      python 3.7 存在全局命令
+      visual studio 2022: 安装需选中c++桌面开发
+      node-gyp：全局安装
 
 ###### 关键配置   
       npm config edit 
       添加配置msvs_version=2022 对应visual studio版本
-      python 需存在全局命令
+
 ###### 编译
       1. npm install 后会自动执行node-gyp rebuild
       2. npm rebuild
