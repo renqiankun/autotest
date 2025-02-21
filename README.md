@@ -12,6 +12,14 @@ electron + vite + better-sqlite3 + drizzle-orm
     4、环境配置 npm config edit
         msvs_version=2022
         python=python3.7
+## 项目启动
+    1、npm install
+    2、win 
+       .\node_modules\.bin\electron-rebuild -f -w
+       mac
+       ./node_modules/.bin/electron-rebuild -f -w
+    3、npm run dev
+    4、npm run build
     
 ### 待办
     数据库通信示例
