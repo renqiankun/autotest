@@ -1,22 +1,39 @@
-#### electron vite vue3 bettter-sqlite3 typeorm 模板
+# electron-vite
 
-##### 版本
-      node：18.14.0
-      python 3.7 存在全局命令
-      visual studio 2022: 安装需选中c++桌面开发
-      node-gyp：全局安装
+This template should help get you started developing with Vue 3 in Vite.
 
-###### 关键配置   
-      npm config edit 
-      添加配置msvs_version=2022 对应visual studio版本
+## Recommended IDE Setup
 
-###### 编译
-      1. npm install 后会自动执行node-gyp rebuild
-      2. npm rebuild
-      3. 手动执行一次 electron-rebuild 编译sqlite模块
-      win： .\node_modules\.bin\electron-rebuild.cmd 
-      mac：.\node_modules\.bin\electron-rebuild（没试）
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
+## Type Support for `.vue` Imports in TS
 
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
+## Customize configuration
 
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```

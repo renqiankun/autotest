@@ -17,14 +17,14 @@ export const ipcRendererReq = async (
   params: any,
   config?: config
 ) => {
-  let defaultConfig: config = {
+  const defaultConfig: config = {
     timeout: 5 * 1000,
     sid: uuid(),
     params: {},
     ...config,
   };
   // 渲染进程向主进程发送消息，同时监听主进程的恢复
-  let renderRquest = new Promise((resolve) => {
+  const renderRquest = new Promise((resolve) => {
     ipcRenderer.on(defaultConfig.sid!, (event, data: any) => {
       resolve(data);
     });
@@ -32,16 +32,16 @@ export const ipcRendererReq = async (
   });
 
   let timer:any = null;
-  let timeoutHand = new Promise((resolve, reject) => {
+  const timeoutHand = new Promise((resolve, reject) => {
     timer = setTimeout(() => {
       resolve({ code: 500, msg: "服务连接超时（-1）" });
       reject(new Error("连接超时"));
     }, defaultConfig.timeout);
   });
 
-  let requestResult = Promise.race([renderRquest, timeoutHand]);
+  const requestResult = Promise.race([renderRquest, timeoutHand]);
   try {
-    let res = await requestResult;
+    const res = await requestResult;
     return res;
   } catch (error) {
     console.warn(

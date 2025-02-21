@@ -1,20 +1,29 @@
 // main.js
 import path from 'path'
-import { mainInitHand } from './dbServices/dbServicesInit'
-import { Menu } from 'electron'
-const { app, BrowserWindow } = require('electron')
+import { mainInitHand } from './dbServicesInit'
+import { Menu, Tray } from 'electron'
+import  { app, BrowserWindow }  from 'electron'
+/**
+ * 根目录 asar资源目录，dist、dist-electron都是在此目录下
+ * electron-builder中files字段配置的文件都会放入此目录
+ */
+const rootDir = path.join(__dirname, '../../')
+// html打包后的dist目录，在assr下
+const electronDist = path.join(__dirname, '../../dist')
+// 打包后preload目录
+const preloadDir = path.join(__dirname, '../preload')
 
-let preloadDir = path.join(__dirname, '../preload')
-let distDir: string = process.env.DIST || ''
-// Modules to control application life and create native browser window
-
+let mainWindow;
 const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  const iconPath = path.join(rootDir, './assets/icon/tray.png')
+
+   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    center :true,
-    titleBarStyle :'hidden',
+    center: true,
+    icon: iconPath,
+    // 隐藏顶部bar，隐藏后需自定义关闭，隐藏等按钮
+    // titleBarStyle: 'hidden',
     webPreferences: {
       preload: path.join(preloadDir, 'index.js')
     }
@@ -22,8 +31,9 @@ const createWindow = () => {
   if (process.env.VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL)
   } else {
-    mainWindow.loadFile(path.resolve(distDir, 'index.html'))
+    mainWindow.loadFile(path.resolve(electronDist, './index.html'))
   }
+  // 顶部菜单栏
   Menu.setApplicationMenu(null)
   // 打开开发工具
   mainWindow.webContents.openDevTools()
@@ -35,6 +45,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow()
   mainInitHand()
+  addTray()
   app.on('activate', () => {
     // 在 macOS 系统内, 如果没有已开启的应用窗口
     // 点击托盘图标时通常会重新创建一个新窗口
@@ -42,12 +53,24 @@ app.whenReady().then(() => {
   })
 })
 
-// 除了 macOS 外，当所有窗口都被关闭的时候退出程序。 因此, 通常
-// 对应用程序和它们的菜单栏来说应该时刻保持激活状态,
-// 直到用户使用 Cmd + Q 明确退出
+/**
+ * 所有窗口被关闭时, mac上试用command + Q 关闭窗口
+ */
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin') app.quit();
 })
 
-// 在当前文件中你可以引入所有的主进程代码
-// 也可以拆分成几个文件，然后用 require 导入。
+// 系统托盘
+let tray
+/**
+ * 添加系统托盘
+ */
+const addTray = () => {
+  const iconPath = path.join(rootDir, './assets/icon/tray.png')
+  tray = new Tray(iconPath)
+  const contextMenu = Menu.buildFromTemplate([
+    { label: '退出', click: () => app.quit() },
+  ])
+  tray.setToolTip('测试应用')
+  tray.setContextMenu(contextMenu)
+}

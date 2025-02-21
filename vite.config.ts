@@ -5,9 +5,12 @@ import electron from 'vite-plugin-electron'
 import { notBundle } from 'vite-plugin-electron/plugin'
 import pkg from './package.json'
 import renderer from 'vite-plugin-electron-renderer'
+import esmShim from '@rollup/plugin-esm-shim'
+import vueDevTools from 'vite-plugin-vue-devtools'
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command }: any) => {
-  let isProduction = command === 'build'
+  const isProduction = command === 'build'
   return {
     base: './',
     plugins: [
@@ -16,13 +19,14 @@ export default defineConfig(({ command }: any) => {
         {
           entry: './electron/main/index.ts',
           vite: {
-            plugins:[
-              !isProduction &&  notBundle()
-            ],
+            plugins: [!isProduction && notBundle()],
             build: {
               outDir: './dist-electron/main',
               rollupOptions: {
-                external: Object.keys(pkg.dependencies),
+                plugins: [
+                  esmShim() // 在Vite的Rollup构建配置中使用插件
+                ],
+                external: Object.keys(pkg.dependencies)
               }
             }
           }
@@ -33,19 +37,19 @@ export default defineConfig(({ command }: any) => {
             build: {
               outDir: './dist-electron/preload',
               rollupOptions: {
-                external: Object.keys(pkg.dependencies),
-              },
+                plugins: [
+                  esmShim() // 在Vite的Rollup构建配置中使用插件
+                ],
+                external: Object.keys(pkg.dependencies)
+              }
             },
-            plugins: [
-              !isProduction &&  notBundle()
-            ],
+            plugins: [!isProduction && notBundle()]
           },
           onstart({ reload }) {
-            // Notify the Renderer process to reload the page when the Preload scripts build is complete, 
+            // Notify the Renderer process to reload the page when the Preload scripts build is complete,
             // instead of restarting the entire Electron App.
             reload()
-          },
-
+          }
         }
       ]),
       renderer({})
@@ -53,7 +57,7 @@ export default defineConfig(({ command }: any) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-        '@common': path.resolve(__dirname, './common'),
+        '@common': path.resolve(__dirname, './common')
       }
     },
     server: {
@@ -67,8 +71,8 @@ export default defineConfig(({ command }: any) => {
         output: {
           sourcemap: false,
           manualChunks: {
-            'base-module': ['vue', 'pinia', 'vue-router', 'axios', 'lodash-es'],
-            'element-plus': ['element-plus']
+            // 'base-module': ['vue', 'pinia', 'vue-router', 'axios', 'lodash-es'],
+            // 'element-plus': ['element-plus']
           },
           entryFileNames: 'js/[name].[hash].js',
           chunkFileNames: 'js/[name].[hash].js',
