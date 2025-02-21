@@ -19,7 +19,7 @@ export default defineConfig(({ command }: any) => {
         {
           entry: './electron/main/index.ts',
           vite: {
-            plugins: [!isProduction && notBundle()],
+            plugins: [ notBundle()],
             build: {
               outDir: './dist-electron/main',
               rollupOptions: {
@@ -43,7 +43,7 @@ export default defineConfig(({ command }: any) => {
                 external: Object.keys(pkg.dependencies)
               }
             },
-            plugins: [!isProduction && notBundle()]
+            plugins: [notBundle()]
           },
           onstart({ reload }) {
             // Notify the Renderer process to reload the page when the Preload scripts build is complete,

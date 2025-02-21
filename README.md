@@ -1,39 +1,17 @@
 # electron-vite
 
-This template should help get you started developing with Vue 3 in Vite.
+electron + vite + better-sqlite3 + drizzle-orm
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+    1、orm使用更现代轻量的drizzle
+    2、业务使用使用vue3，可自行替换
+## 环境配置
+    1、node使用v20.18.0
+    2、visual studio2022 (安装 桌面端开发c++)
+    3、python 3.7
+    4、环境配置 npm config edit
+        msvs_version=2022
+        python=python3.7
+    
+### 待办
+    数据库通信示例
+    多窗口示例
