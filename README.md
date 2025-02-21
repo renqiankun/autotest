@@ -14,9 +14,9 @@ electron + vite + better-sqlite3 + drizzle-orm
         python=python3.7
 ## 项目启动
     1、npm install
-    2、win 
+    2、win 执行
        .\node_modules\.bin\electron-rebuild -f -w
-       mac
+       mac 执行
        ./node_modules/.bin/electron-rebuild -f -w
     3、npm run dev
     4、npm run build
