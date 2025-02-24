@@ -1,12 +1,12 @@
 {
   "name": "electron-vite-template",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist-electron/main/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build && electron-builder",
+    "build": "vue-tsc && vite build && npx drizzle-kit generate &&  electron-builder",
     "preview": "vite preview"
   },
   "dependencies": {

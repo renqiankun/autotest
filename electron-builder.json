@@ -1,5 +1,6 @@
-{
-    "productName": "${name}",
+
+ {
+    "productName": "electron-vite-template",
     "appId": "AppID",
     "asar": true,
     "directories": {
@@ -8,7 +9,8 @@
     "files": [
         "assets/**/*",
         "dist/**/*",
-        "dist-electron/**/*"
+        "dist-electron/**/*",
+        "migrations/**/*"
     ],
     "electronDownload": {
         "mirror": "https://npmmirror.com/mirrors/electron/"

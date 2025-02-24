@@ -15,12 +15,12 @@ electron + vite + better-sqlite3 + drizzle-orm
     5、 全局安装node-gyp: npm i node-gpy -g    
 ## 项目启动
     1、npm install
-    2、win 执行
+    2、npm rebuild
+    3、win 执行
        .\node_modules\.bin\electron-rebuild -f -w
        mac 执行
        ./node_modules/.bin/electron-rebuild -f -w
-
-    3   执行 npm run rebuild
+      
     4、 启动 npm run dev
     5、 打包 npm run build
     
