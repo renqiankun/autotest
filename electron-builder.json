@@ -1,5 +1,5 @@
 {
-    "productName": "electron-vite-app",
+    "productName": "${name}",
     "appId": "AppID",
     "asar": true,
     "directories": {

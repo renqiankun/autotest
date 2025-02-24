@@ -1,6 +1,6 @@
 import { asc, between, count, eq, getTableColumns, sql } from 'drizzle-orm'
 import { db } from '../dbInit'
-import userSchema from '../schema/user'
+import userSchema from '../schema/users'
 
 export class userServices {
   static async getUserById(id: number) {

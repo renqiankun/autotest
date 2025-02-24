@@ -1,5 +1,5 @@
 {
-  "name": "autotest",
+  "name": "electron-vite-template",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,6 +13,7 @@
     "axios": "^1.5.0",
     "better-sqlite3": "^11.8.1",
     "drizzle-orm": "^0.39.3",
+    "element-plus": "^2.9.5",
     "lodash-es": "^4.17.21",
     "path": "^0.12.7",
     "pinia": "^2.1.7",
