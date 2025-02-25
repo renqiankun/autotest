@@ -3,6 +3,7 @@ import path from 'path'
 import { mainInitHand } from './dbServicesInit'
 import { Menu, Tray } from 'electron'
 import  { app, BrowserWindow }  from 'electron'
+import 'dotenv/config'
 /**
  * 根目录 asar资源目录，dist、dist-electron都是在此目录下
  * electron-builder中files字段配置的文件都会放入此目录

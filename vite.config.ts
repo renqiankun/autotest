@@ -1,43 +1,39 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import { rmSync,readdirSync ,statSync} from 'node:fs'
+import { rmSync, readdirSync, statSync } from 'node:fs'
 import electron from 'vite-plugin-electron'
 import { notBundle } from 'vite-plugin-electron/plugin'
 import pkg from './package.json'
 import renderer from 'vite-plugin-electron-renderer'
 // 用于支持__dirname require等
 import esmShim from '@rollup/plugin-esm-shim'
-import vueDevTools from 'vite-plugin-vue-devtools'
+// import vueDevTools from 'vite-plugin-vue-devtools'
 
-const getEntries = (dir:string) => {
-  const entries:Record<string,string> = {};
-  // 递归读取目录中的文件
-  const walk = (dirPath:string) => {
-    const files = readdirSync(dirPath);
+const getEntries = (dir: string) => {
+  const entries: Record<string, string> = {}
+  const walk = (dirPath: string) => {
+    const files = readdirSync(dirPath)
     files.forEach(file => {
-      const fullPath = path.join(dirPath, file);
-      const stat = statSync(fullPath);
+      const fullPath = path.join(dirPath, file)
+      const stat = statSync(fullPath)
 
       if (stat.isDirectory()) {
-        // 如果是目录，继续递归
-        walk(fullPath);
+        walk(fullPath)
       } else if (file.endsWith('.ts') || file.endsWith('.js')) {
-        // 如果是入口文件（这里假设入口文件是 .ts 或 .js）
-        const relativePath = path.relative(dir, fullPath);
-        const name = relativePath.replace(/\.(ts|js)$/, ''); // 作为入口文件的名称
-        entries[name] = fullPath; // 动态生成入口文件
+        const relativePath = path.relative(dir, fullPath)
+        const name = relativePath.replace(/\.(ts|js)$/, '')
+        entries[name] = fullPath
       }
-    });
-  };
-  
-  walk(dir); // 从根目录开始
-  return entries;
-};
+    })
+  }
 
+  walk(dir)
+  return entries
+}
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }: any) => {
+export default defineConfig(({ command, mode }: any) => {
   const isProduction = command === 'build'
   rmSync('dist-electron', { recursive: true, force: true })
 
@@ -49,16 +45,16 @@ export default defineConfig(({ command }: any) => {
         {
           // entry: './electron/main/index.ts',
           vite: {
-            plugins: [ notBundle()],
+            plugins: [notBundle()],
             build: {
               outDir: './dist-electron/main',
               rollupOptions: {
                 // 动态生成的入口文件
-                input: getEntries(path.resolve(__dirname, 'electron/main')), 
+                input: getEntries(path.resolve(__dirname, 'electron/main')),
                 output: {
                   dir: 'dist-electron/main', // 输出目录
                   entryFileNames: '[name].js', // 根据目录输出文件
-                  chunkFileNames: '[name].js', // 分离的 chunk 文件
+                  chunkFileNames: '[name].js' // 分离的 chunk 文件
                 },
                 plugins: [
                   esmShim() // 在Vite的Rollup构建配置中使用插件
@@ -75,11 +71,11 @@ export default defineConfig(({ command }: any) => {
               outDir: './dist-electron/preload',
               rollupOptions: {
                 // 动态生成的入口文件
-                input: getEntries(path.resolve(__dirname, 'electron/preload')), 
+                input: getEntries(path.resolve(__dirname, 'electron/preload')),
                 output: {
                   dir: 'dist-electron/preload', // 输出目录
                   entryFileNames: '[name].js', // 根据目录输出文件
-                  chunkFileNames: '[name].js', // 分离的 chunk 文件
+                  chunkFileNames: '[name].js' // 分离的 chunk 文件
                 },
                 plugins: [
                   esmShim() // 在Vite的Rollup构建配置中使用插件
@@ -101,7 +97,7 @@ export default defineConfig(({ command }: any) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-        '@common': path.resolve(__dirname, './common'),
+        '@common': path.resolve(__dirname, './common')
       }
     },
     server: {

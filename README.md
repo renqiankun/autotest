@@ -17,7 +17,7 @@ electron + vite + better-sqlite3 + drizzle-orm
     │   │   ├── utils.ts
     │   │   ├── dbServicesInit.ts 抛出数据库初始化方法
     │   │   ├── index.ts  主进程入口
-    │   │   └── preload 预加载目录
+    │   └── preload 预加载目录
     ├── migrations 数据库升级目录
     ├── public  vue项目 目录
     ├── src vue项目目录
@@ -58,6 +58,8 @@ electron + vite + better-sqlite3 + drizzle-orm
 
 
 #
+    数据库升级分开发环境 和生产环境，开发环境使用drizzle-kit push，生产环境使用migrate方式
+
     一、打包会自动生成数据库升级文件，无需额外处理，只需保证drizzle.config.ts中databasePath数据库路径正确指向本地数据库文件
     
     二、开发环境在修改数据库接口schme后执行npm run syncSchema即可
@@ -66,4 +68,4 @@ electron + vite + better-sqlite3 + drizzle-orm
     2 npx drizzle-kit push 将shceme直接同步到本地数据库
     3 npx electron-rebuild  -f -w 编译原生模块此处指better-sqlite3适配electron中的node版本
 
-    三、migrations目录为数据库升级过程文件，不可随意删除修改
+    三、migrations目录为数据库升级过程文件，不可随意删除
