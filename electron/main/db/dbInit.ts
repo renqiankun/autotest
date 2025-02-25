@@ -11,5 +11,8 @@ const sqlite = new Database(DB_PATH)
 export let db
 export const dbInit = async () => {
   db = drizzle(sqlite, {schema})
-  await migrate(db, { migrationsFolder: path.join(__dirname, '../../../migrations') })
+  // 仅在生成环境中使用迁移流程(打包自动生成升级文件)，开发环境使用 npm run syncSchema 直接同步数据库
+  if(process.env.NODE_ENV !== 'development'){
+    await migrate(db, { migrationsFolder: path.join(__dirname, '../../../migrations') })
+  }
 }

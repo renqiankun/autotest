@@ -1,1 +1,0 @@
-ALTER TABLE `users` ADD `first_name222` text;

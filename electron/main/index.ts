@@ -12,7 +12,10 @@ const rootDir = path.join(__dirname, '../../')
 const electronDist = path.join(__dirname, '../../dist')
 // 打包后preload目录
 const preloadDir = path.join(__dirname, '../preload')
-
+console.log({
+  nodeVersion: process.version,          // Electron 使用的 Node.js 版本
+  nodeModuleVersion: process.versions.modules  // NODE_MODULE_VERSION
+});
 let mainWindow;
 const createWindow = () => {
   const iconPath = path.join(rootDir, './assets/icon/tray.png')
