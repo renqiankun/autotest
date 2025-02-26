@@ -16,7 +16,6 @@
 ```bash
 📦 项目根目录
 ├── assets                 # 静态资源（包含打包后的APP图标）
-├── common                 # 渲染进程 & 主进程可共享的代码
 ├── electron               # Electron 相关代码
 │   ├── main               # 主进程代码
 │   │   ├── db             # 数据库相关代码

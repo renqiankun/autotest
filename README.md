@@ -17,7 +17,6 @@ A modern desktop application template based on **Electron + Vite + Drizzle ORM +
 ```bash
 📦 Project Root
 ├── assets                 # Static resources (includes app icons after packaging)
-├── common                 # Shared code for both renderer & main processes
 ├── electron               # Electron-related code
 │   ├── main               # Main process code
 │   │   ├── db             # Database-related code
