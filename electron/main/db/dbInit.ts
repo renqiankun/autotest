@@ -7,7 +7,9 @@ import * as schema from './schema'
 import { APP_NAME, DB_CONFIG } from '../utils/constants'
 import { getAppHand } from '../utils'
 const DB_PATH = path.join(getAppHand(), APP_NAME, DB_CONFIG.dbFileName)
-const sqlite = new Database(DB_PATH)
+const sqlite = new Database(DB_PATH,{
+  timeout:DB_CONFIG.timeout,
+})
 
 export let db: BetterSQLite3Database<typeof schema>;
 export const dbInit = async () => {
