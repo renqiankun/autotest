@@ -1,7 +1,7 @@
 import { queryDB } from './modules/db'
-import fs from 'node:fs'
+import { fsProxy } from './modules/fs'
 import { contextBridge } from 'electron'
 contextBridge.exposeInMainWorld('electronAPI', {
   queryDB: queryDB,
-  fs: fs
+  fs: fsProxy
 })
