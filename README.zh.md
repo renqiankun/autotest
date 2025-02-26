@@ -112,9 +112,9 @@ npm run build                # 构建项目
   npm run syncSchema
   ```
   **执行的操作**：
-  - 重新编译 `better-sqlite3`
+  - 重新编译 `better-sqlite3` 
   - 使用 `drizzle-kit push` 直接同步数据库
-  - 重新适配 Electron 版本
+  - 重新适配 Electron 版本 
 
 #### **3️⃣ 迁移文件管理**
 - `migrations` 目录用于存放数据库升级文件
