@@ -1,133 +1,135 @@
-[ 中文](README.md) | [ English](README.en.md)
+[ English](README.md) | [ 中文](README.zh.md)
+
+
 # 🚀 Electron + Vite + Drizzle ORM + Better-SQLite3
 
-一个基于 **Electron + Vite + Drizzle ORM + Better-SQLite3** 的现代化桌面应用模板。
+A modern desktop application template based on **Electron + Vite + Drizzle ORM + Better-SQLite3**.
 
-## ✨ 项目特点
-- **Drizzle ORM** 现代化、轻量级 ORM 方案
-- **Vue 3** 作为 UI 业务层（可自行替换）
+## ✨ Features
+- **Drizzle ORM** - A modern, lightweight ORM solution
+- **Vue 3** - Used for the UI layer (can be replaced as needed)
 - **Electron v34.0.0** + **Node.js v20.18.0**
-- **Better-SQLite3** 高效、同步的 SQLite 数据库库
+- **Better-SQLite3** - High-performance, synchronous SQLite database library
 
 ---
 
-## 📂 目录结构
+## 📂 Project Structure
 
 ```bash
-📦 项目根目录
-├── assets                 # 静态资源（包含打包后的 APP 图标，仅适用于 Windows）
-├── common                 # 渲染进程 & 主进程可共享的代码
-├── electron               # Electron 相关代码
-│   ├── main               # 主进程代码
-│   │   ├── db             # 数据库相关代码
-│   │   ├── router         # 路由（提供访问数据库的接口）
-│   │   ├── utils.ts       # 工具函数
-│   │   ├── dbServicesInit.ts  # 数据库初始化逻辑
-│   │   ├── index.ts       # 主进程入口文件
-│   ├── preload            # 预加载目录
-├── migrations             # 数据库升级相关文件
-├── public                 # Vue 资源目录
-├── src                    # Vue 代码目录
-├── drizzle.config.ts       # Drizzle ORM 迁移配置文件
-├── electron-builder.json   # Electron 打包配置
-├── vite.config.tsn        # vite 打包配置
+📦 Project Root
+├── assets                 # Static assets (includes packaged app icons)
+├── common                 # Shared code between renderer & main process
+├── electron               # Electron-related code
+│   ├── main               # Main process code
+│   │   ├── db             # Database-related code
+│   │   ├── router         # Routes (providing database access APIs)
+│   │   ├── utils.ts       # Utility functions
+│   │   ├── dbServicesInit.ts  # Database initialization logic
+│   │   ├── index.ts       # Main process entry file
+│   ├── preload            # Preload directory
+├── migrations             # Database migration files
+├── public                 # Vue assets directory
+├── src                    # Vue source code
+├── drizzle.config.ts       # Drizzle ORM migration configuration
+├── electron-builder.json   # Electron packaging configuration
+├── vite.config.tsn         # vite build
 ```
 
 ---
 
-## ⚙️ 环境配置
+## ⚙️ Environment Setup
 
-1. **Node.js** 使用 `v20.18.0`
-2. **Visual Studio 2022**（需安装 **桌面端开发 C++** 组件）
+1. **Node.js** v20.18.0
+2. **Visual Studio 2022** (Install **Desktop Development with C++**)
 3. **Python 3.7**
-4. **环境变量配置**
+4. **Configure environment variables**
    ```sh
    npm config edit
    ```
-   添加以下内容：
+   Add the following:
    ```ini
    msvs_version=2022
    python=python3.7
    ```
-5. **全局安装 `node-gyp`**
+5. **Install `node-gyp` globally**
    ```sh
    npm install -g node-gyp
    ```
 
 ---
 
-## 🚀 启动项目
+## 🚀 Start the Project
 
 ```sh
-npm install                  # 安装依赖
-npm rebuild                  # 重新编译本地依赖
-npx electron-rebuild -f -w better-sqlite3  # 适配 Electron 原生模块
-npm run dev                  # 启动项目
-npm run build                # 构建项目
+npm install                  # Install dependencies
+npm rebuild                  # Rebuild local dependencies
+npx electron-rebuild -f -w better-sqlite3  # Adapt Electron native modules
+npm run dev                  # Start the project
+npm run build                # Build the project
 ```
 
 ---
 
-## 🔨 开发指南
+## 🔨 Development Guide
 
-### **📌 本地数据库同步**
-- **修改数据库 Schema 后执行**：
+### **📌 Sync Local Database**
+- **After modifying the database schema, run:**
   ```sh
   npm run syncSchema
   ```
-  该命令包含以下三步：
-  1. `npm rebuild` - 重新编译 `better-sqlite3` 适配本地 Node.js 版本
-  2. `npx drizzle-kit push` - 将 `schema` 直接同步到本地数据库
-  3. `npx electron-rebuild -f -w better-sqlite3` - 重新编译 `better-sqlite3` 适配 Electron 版本
+  This command includes three steps:
+  1. `npm rebuild` - Recompile `better-sqlite3` for the local Node.js version
+  2. `npx drizzle-kit push` - Sync `schema` directly to the local database
+  3. `npx electron-rebuild -f -w better-sqlite3` - Recompile `better-sqlite3` for Electron
 
-### **📌 打包时数据库升级**
-1. 生成数据库升级文件：
+### **📌 Database Migration During Packaging**
+1. Generate database migration files:
    ```sh
    npm run generateSchema
    ```
-2. 执行打包：
+2. Build the project:
    ```sh
    npm run build
    ```
 
 ---
 
-## ✅ 开发说明
+## ✅ Development Notes
 
-### **📌 预加载（Preload）文件引用**
-1. **Preload 目录内部文件相互引用**，使用 `import` 方式
-2. **Preload 引用 `main` 目录的文件**，使用 `import` 方式
-3. **Preload 引用原生模块**，使用 `require` 方式，例如：
+### **📌 Preload File Imports**
+1. **For internal imports within the Preload directory**, use `import`
+2. **For Preload importing files from `main` directory**, use `import`
+3. **For Preload importing native modules**, use `require`, e.g.:
    ```js
    const { contextBridge } = require('electron');
    ```
 
-### **📌 数据库升级方式**
-数据库升级分为 **开发环境** 和 **生产环境**：
+### **📌 Database Migration Strategy**
+Database migrations are divided into **development** and **production** environments:
 
-#### **1️⃣ 生产环境**
-- **打包时会自动生成数据库升级文件**，无需手动处理
-- 确保 `drizzle.config.ts` 中 `databasePath` 指向本地数据库文件
+#### **1️⃣ Production Environment**
+- **Migrations are automatically generated during packaging**, no manual handling is required
+- Ensure `drizzle.config.ts` contains the correct `databasePath` pointing to the local database file
 
-#### **2️⃣ 开发环境**
-- **Schema 变更后，执行**：
+#### **2️⃣ Development Environment**
+- **After modifying the schema, run:**
   ```sh
   npm run syncSchema
   ```
-  **执行的操作**：
-  - 重新编译 `better-sqlite3`
-  - 使用 `drizzle-kit push` 直接同步数据库
-  - 重新适配 Electron 版本
+  **This performs:**
+  - Rebuilding `better-sqlite3`
+  - Syncing schema directly using `drizzle-kit push`
+  - Re-adapting Electron version
 
-#### **3️⃣ 迁移文件管理**
-- `migrations` 目录用于存放数据库升级文件
-- **不要随意删除** 该目录，否则可能导致数据丢失
+#### **3️⃣ Migration File Management**
+- The `migrations` directory stores database migration files
+- **Do not delete** this directory arbitrarily, as it may lead to data loss
 
 ---
 
-## 📌 待办事项
-✅ **数据库通信示例**
-✅ **多窗口示例**
+## 📌 To-Do List
+✅ **Database communication example**
+✅ **Multi-window example**
 
 ---
 
