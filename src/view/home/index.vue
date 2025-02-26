@@ -1,11 +1,12 @@
 <template>
-  <el-button @click="addUserHand">添加用户</el-button>
+  <el-button @click="getUserListHand">查询用户</el-button>
 </template>
 
 <script setup lang="ts">
   import { getUserListDb } from '@/api/user'
   const fs = window.electronAPI.fs
-  const addUserHand = async () => {
+
+  const getUserListHand = async () => {
     let data = await getUserListDb()
     console.log(data)
   }
