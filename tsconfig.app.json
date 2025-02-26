@@ -5,7 +5,7 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "types": ["element-plus/global"],
+    "types": ["element-plus/global","./global.d.ts"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

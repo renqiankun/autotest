@@ -3,9 +3,12 @@
 </template>
 
 <script setup lang="ts">
-   const addUserHand = ()=>{
-    
-   }
+  import { getUserListDb } from '@/api/user'
+  const fs = window.electronAPI.fs
+  const addUserHand = async () => {
+    let data = await getUserListDb()
+    console.log(data)
+  }
 </script>
 
 <style lang="scss" scoped></style>

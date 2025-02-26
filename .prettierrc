@@ -12,7 +12,7 @@
     "htmlWhitespaceSensitivity": "ignore",
     "overrides": [
       {
-        "files": ".prettierrc"
+        "files": ".prettierrc" 
       }
     ]
   }

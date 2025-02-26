@@ -1,6 +1,6 @@
 import { asc, between, count, eq, getTableColumns, sql } from 'drizzle-orm'
-import { db } from '../dbInit'
-import   {users}  from '../schema/users'
+import { db } from '../dbConnect'
+import { users } from '../schema/users'
 
 export class userServices {
   static async getUserById(id: number) {
@@ -8,24 +8,28 @@ export class userServices {
   }
   /**根据id更新用户详情 */
   static async updateUserById(id: number, data: any) {
-   return  await db.transaction(async tx => {
-     const user=  await tx.update(users).set(data).where(eq(users.id, id))
-      if(!user){
+    return await db.transaction(async tx => {
+      const user = await tx.update(users).set(data).where(eq(users.id, id))
+      if (!user) {
         tx.rollback()
         return false
       }
-      return 
+      return
     })
   }
-    /**根据id更新用户详情 */
-    static async insertUser(id: number, data: any) {
-      return  await db.transaction(async tx => {
-        const user=  await tx.insert(users).values(data)
-         if(!user){
-           tx.rollback()
-           return false
-         }
-         return 
-       })
-     }
+  /**根据id更新用户详情 */
+  static async insertUser(id: number, data: any) {
+    return await db.transaction(async tx => {
+      const user = await tx.insert(users).values(data)
+      if (!user) {
+        tx.rollback()
+        return false
+      }
+      return
+    })
+  }
+
+  static async getUserList() {
+    return db.select().from(users)
+  }
 }

@@ -5,7 +5,7 @@ import { rmSync, readdirSync, statSync } from 'node:fs'
 import electron, { ElectronOptions } from 'vite-plugin-electron'
 import { notBundle } from 'vite-plugin-electron/plugin'
 import pkg from './package.json'
-import renderer from 'vite-plugin-electron-renderer'
+// import renderer from 'vite-plugin-electron-renderer'
 // 用于支持__dirname require等
 import esmShim from '@rollup/plugin-esm-shim'
 // import vueDevTools from 'vite-plugin-vue-devtools'
@@ -21,7 +21,21 @@ export default defineConfig(({ command, mode }: any) => {
       vue(),
       electron([
         // 编译preload下文件
-        ...generatePrelaodFiles('./electron/preload'),
+        {
+          vite: {
+            build: {
+              rollupOptions: {
+                // 动态生成的入口文件
+                input: getEntries(path.resolve(__dirname, 'electron/preload')),
+                output: {
+                  dir: 'dist-electron/preload', // 输出目录
+                  entryFileNames: '[name].mjs', // 根据目录输出文件
+                  chunkFileNames: '[name].mjs' // 分离的 chunk 文件
+                },
+              }
+            }
+          }
+        },
         // 编译main文件
         {
           // entry: './electron/main/index.ts',
@@ -46,7 +60,7 @@ export default defineConfig(({ command, mode }: any) => {
           }
         }
       ]),
-      renderer({})
+      // renderer({})
     ],
     resolve: {
       alias: {
@@ -101,51 +115,6 @@ const getEntries = (dir: string) => {
         const relativePath = path.relative(dir, fullPath)
         const name = relativePath.replace(/\.(ts|js)$/, '')
         entries[name] = fullPath
-      }
-    })
-  }
-  walk(dir)
-  return entries
-}
-
-/**
- * 遍历目录生成preload的rollup格式
- * @param dir 目录
- *
- */
-const generatePrelaodFiles = (dir: string) => {
-  const entries: Array<any> = []
-  const walk = (dirPath: string) => {
-    const files = readdirSync(dirPath)
-    files.forEach(file => {
-      const fullPath = path.join(dirPath, file)
-      const stat = statSync(fullPath)
-      if (stat.isDirectory()) {
-        walk(fullPath)
-      } else if (file.endsWith('.ts') || file.endsWith('.js')) {
-        const relativePath = path.relative(dir, fullPath)
-        const name = relativePath.replace(/\.(ts|js)$/, '')
-        const generate: ElectronOptions = {
-          vite: {
-            build: {
-              rollupOptions: {
-                input: {
-                  [name]: fullPath
-                },
-                output: {
-                  // format: "module",
-                  dir: './dist-electron/preload', // 输出目录
-                  entryFileNames: '[name].js', // 根据目录输出文件
-                  chunkFileNames: '[name].js' // 分离的 chunk 文件
-                }
-              }
-            }
-          },
-          onstart({ reload }: any) {
-            reload()
-          }
-        }
-        entries.push(generate)
       }
     })
   }

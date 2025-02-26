@@ -1,7 +1,7 @@
-import {queryDBHand} from './db'
-import {DB_CONFIG} from '../main/utils/constants'
-const {contextBridge} = require('electron')
-// const {DB_CONFIG} = require('../main/utils/constants')
-console.log(contextBridge)
-console.log(queryDBHand)
-console.log(DB_CONFIG)
+import { queryDB } from './modules/db'
+import { fsProxy } from './modules/fs'
+import { contextBridge } from 'electron'
+contextBridge.exposeInMainWorld('electronAPI', {
+  queryDB: queryDB,
+  fs: fsProxy
+})

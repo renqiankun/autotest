@@ -1,9 +1,12 @@
 // main.js
 import path from 'path'
-import { mainInitHand } from './dbServicesInit'
 import { Menu, Tray } from 'electron'
 import  { app, BrowserWindow }  from 'electron'
 import 'dotenv/config'
+
+// 初始化数据库handler
+import { dbInit } from "./dbInit";
+
 /**
  * 根目录 asar资源目录，dist、dist-electron都是在此目录下
  * electron-builder中files字段配置的文件都会放入此目录
@@ -26,9 +29,10 @@ const createWindow = () => {
     // 隐藏顶部bar，隐藏后需自定义关闭，隐藏等按钮
     // titleBarStyle: 'hidden',
     webPreferences: {
-      preload: path.join(preloadDir, 'index.js'),
-      // contextIsolation: false,
-
+      preload: path.join(preloadDir, 'index.mjs'),
+      sandbox: false,
+      nodeIntegration: false,  // 关闭 nodeIntegration（更安全）
+      contextIsolation: true,  // 启用 contextIsolation
     }
   })
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -47,7 +51,7 @@ const createWindow = () => {
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(() => {
   createWindow()
-  mainInitHand()
+  dbInit()
   addTray()
   app.on('activate', () => {
     // 在 macOS 系统内, 如果没有已开启的应用窗口
