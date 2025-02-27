@@ -80,11 +80,8 @@ npm run build                # 构建项目
   3. `npx electron-rebuild -f -w better-sqlite3` - 重新编译 `better-sqlite3` 适配 Electron 版本
 
 ### **📌 打包时数据库升级**
-1. 生成数据库升级文件：
-   ```sh
-   npm run generateSchema
-   ```
-2. 执行打包：
+
+1. 执行打包： 会先执行 npm run generateSchama,生成数据库升级文件
    ```sh
    npm run build
    ```

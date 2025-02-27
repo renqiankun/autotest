@@ -3,12 +3,13 @@
 </template>
 
 <script setup lang="ts">
-  import { getUserListDb } from '@/api/user'
+  import { getUserListDB } from '@/api/user'
   const fs = window.electronAPI.fs
-
+  const env = window.electronAPI.env
   const getUserListHand = async () => {
-    let data = await getUserListDb()
+    let data = await getUserListDB()
     console.log(data)
+    console.log(env)
   }
 </script>
 

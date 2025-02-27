@@ -5,6 +5,6 @@ export  const users = sqliteTable('users', {
   updatedId: integer(),
   first_name: text(),
   first_name22: text(),
-  first_name33: text(),
+  first_name44: text(),
   email: text().unique(),
 })

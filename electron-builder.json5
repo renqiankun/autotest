@@ -10,7 +10,8 @@
         "assets/**/*",
         "dist/**/*",
         "dist-electron/**/*",
-        "migrations/**/*"
+        "migrations/**/*",
+        ".env.production"
     ],
     "electronDownload": {
         "mirror": "https://npmmirror.com/mirrors/electron/"

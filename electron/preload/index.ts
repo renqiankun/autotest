@@ -6,5 +6,6 @@ import { contextBridge } from 'electron'
  */
 contextBridge.exposeInMainWorld('electronAPI', {
   queryDB: queryDB,
+  env: process.env.NODE_ENV,
   fs: fsProxy
 })

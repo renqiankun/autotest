@@ -18,7 +18,7 @@ export let db: BetterSQLite3Database<typeof schema>
 export const dbConnect = async () => {
   db = drizzle(sqlite, { schema })
   // 仅在生成环境中使用迁移流程(打包自动生成升级文件)，开发环境使用 npm run syncSchema 直接同步数据库
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV === 'production') {
     await migrate(db, { migrationsFolder: path.join(__dirname, '../../../migrations') })
   }
 }

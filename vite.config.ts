@@ -14,7 +14,6 @@ import esmShim from '@rollup/plugin-esm-shim'
 export default defineConfig(({ command, mode }: any) => {
   const isProduction = command === 'build'
   rmSync('dist-electron', { recursive: true, force: true })
-
   return {
     base: './',
     plugins: [

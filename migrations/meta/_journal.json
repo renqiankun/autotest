@@ -15,6 +15,20 @@
       "when": 1740555582207,
       "tag": "0001_red_deadpool",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1740564386835,
+      "tag": "0002_shocking_pyro",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1740625289537,
+      "tag": "0003_odd_hitman",
+      "breakpoints": true
     }
   ]
 }

@@ -5,8 +5,8 @@
   "type": "module",
   "main": "./dist-electron/main/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build && electron-builder",
+    "dev": "cross-env NODE_ENV=development vite",
+    "build": " npm run generateSchama && vue-tsc && cross-env NODE_ENV=production vite build &&  electron-builder ",
     "preview": "vite preview",
     "generateSchama": "npx drizzle-kit generate",
     "syncSchema": "npm rebuild better-sqlite3 && npx drizzle-kit push && npx electron-rebuild  -f -w better-sqlite3"
@@ -35,6 +35,7 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "cross-env": "^7.0.3",
     "drizzle-kit": "^0.30.4",
     "electron": "^34.0.0",
     "electron-builder": "^25.1.8",

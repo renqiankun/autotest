@@ -82,11 +82,8 @@ npm run build                # Build the project
   3. `npx electron-rebuild -f -w better-sqlite3` - Rebuilds `better-sqlite3` to be compatible with Electron
 
 ### **📌 Database Migration When Packaging**
-1. Generate migration files:
-   ```sh
-   npm run generateSchema
-   ```
-2. Build the project:
+
+1. Build the project: will do `npm run generateSchama` Generate migration files
    ```sh
    npm run build
    ```

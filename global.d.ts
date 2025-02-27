@@ -32,6 +32,7 @@ interface fsProxy {
 declare interface Window {
   electronAPI: {
     queryDB: <T>(params: QueryDBType) => Promise<T>
-    fs: fsProxy
+    fs: fsProxy,
+    env:'development' | 'production'
   }
 }
