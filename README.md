@@ -63,6 +63,7 @@ npm install                  # Install dependencies
 npm rebuild                  # Rebuild native dependencies
 # npx electron-rebuild -f -w [nmodule] Adapt Electron native modules, optionally specify the module name, e.g., better-sqlite3.
 npx electron-rebuild -f -w better-sqlite3 
+npm run syncSchema           #  generate sql Schema first
 npm run dev                  # Start development mode
 npm run build                # Build the project
 ```

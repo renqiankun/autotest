@@ -61,6 +61,7 @@
 npm install                  # 安装依赖
 npm rebuild                  # 重新编译本地依赖
 npx electron-rebuild -f -w better-sqlite3  # 适配 Electron 原生模块，可选指定模块名 如：better-sqlite3
+npm run syncSchema           # 先同步数据库 Schema
 npm run dev                  # 启动项目
 npm run build                # 构建项目
 ```

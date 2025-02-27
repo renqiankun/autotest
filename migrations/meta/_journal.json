@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1740555330403,
-      "tag": "0000_steady_firedrake",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1740555582207,
-      "tag": "0001_red_deadpool",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1740564386835,
-      "tag": "0002_shocking_pyro",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1740625289537,
-      "tag": "0003_odd_hitman",
+      "when": 1740645046311,
+      "tag": "0000_narrow_crusher_hogan",
       "breakpoints": true
     }
   ]
