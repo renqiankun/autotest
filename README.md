@@ -126,7 +126,7 @@ Database migrations are handled differently for **development** and **production
 ## 📌 To-Do List
 ✅ **Database Communication Example**  
 ✅ **App Update with electron-updater Example**  
-⬜ **Add Logger**  
+✅ **Add Logger**  
 ⬜ **Multi-Window Example**  
 
 ---

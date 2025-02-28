@@ -26,6 +26,7 @@
   import addOrUpdate from './addOrUpdate.vue'
   import { ElMessage, ElMessageBox } from 'element-plus'
   import checkAppVersion from './checkAppVersion.vue'
+  const logger = window.electronAPI.logger
   onMounted(() => {
     getUserListHand()
   })
@@ -34,6 +35,7 @@
    * 获取用户列表
    */
   const getUserListHand = async () => {
+    logger.info('获取用户列表')
     let { code, data } = await getUserListDB()
     if (code == 200) {
       tableData.value = data

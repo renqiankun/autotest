@@ -24,7 +24,7 @@ const sendStatus = (code, data?: any) => {
   webContents?.send?.(UPDATE_CHANNEL.MSG,  {code, data} )
 }
 
-ipcMain.handle(UPDATE_CHANNEL.MSG, async (event, message) => {
+ipcMain.on(UPDATE_CHANNEL.MSG, async (event, message) => {
   webContents = event.sender
 })
 
@@ -32,10 +32,10 @@ ipcMain.handle(UPDATE_CHANNEL.MSG, async (event, message) => {
 ipcMain.handle(UPDATE_CHANNEL.SET_URL, (e, url) => autoUpdater.setFeedURL(url))
 
 // 执行更新检查
-ipcMain.handle(UPDATE_CHANNEL.CHECK_UPDATE, () => autoUpdater.checkForUpdates())
+ipcMain.on(UPDATE_CHANNEL.CHECK_UPDATE, () => autoUpdater.checkForUpdates())
 
 // 手动下载更新文件
-ipcMain.handle(UPDATE_CHANNEL.DOWNLOAD_UPDATE, async (e, data) => autoUpdater.downloadUpdate())
+ipcMain.on(UPDATE_CHANNEL.DOWNLOAD_UPDATE, async (e, data) => autoUpdater.downloadUpdate())
 
 // 退出并安装
-ipcMain.handle(UPDATE_CHANNEL.EXIT_AND_INSTALL, () => autoUpdater.quitAndInstall())
+ipcMain.on(UPDATE_CHANNEL.EXIT_AND_INSTALL, () => autoUpdater.quitAndInstall())

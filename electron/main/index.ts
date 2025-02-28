@@ -8,7 +8,7 @@ import { dbInit } from "./dbInit";
 import dotenv  from 'dotenv'
 import { getDirname } from './utils';
 import './auto-update/index'
-// import './auto-update/index'
+import logger from './logger'
 const __dirname = getDirname(import.meta.url)
 
 const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
@@ -56,6 +56,7 @@ const createWindow = () => {
 // 和创建浏览器窗口的时候调用
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(async () => {
+  logger.info('main init')
   await dbInit()
   createWindow()
   addTray()

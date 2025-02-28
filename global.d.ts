@@ -30,11 +30,20 @@ interface fsProxy {
  * app更新
  */
 interface AppUpdate {
-  onUpdateMsg: (callback: (data:{code:number,data?: any}) => void) => void
+  onUpdateMsg: (callback: (data: { code: number; data?: any }) => void) => void
   setUrl: (url: string) => void
   checkUpdate: () => void
   startDownload: () => void
   quitAndInstall: () => void
+}
+
+interface Logger {
+  warn: (msg: string) => Promise<void>
+  error: (msg: string) => Promise<void>
+  info: (msg: string) => Promise<void>
+  verbose: (msg: string) => Promise<void>
+  debug: (msg: string) => Promise<void>
+  silly: (msg: string) => Promise<void>
 }
 /**
  * renderer注入electron
@@ -45,5 +54,6 @@ declare interface Window {
     fs: fsProxy
     env: 'development' | 'production'
     update: AppUpdate
+    logger: Logger
   }
 }
