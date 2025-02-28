@@ -18,6 +18,7 @@ A modern desktop application template based on **Electron + Vite + Drizzle ORM +
 ├── assets                 # Static resources (including app icons for packaging)
 ├── electron               # Electron-related code
 │   ├── main               # Main process code
+│   │   ├── auto-update    # electron-updater auto update
 │   │   ├── db             # Database-related code
 │   │   ├── router         # Routes (provides access to the database)
 │   │   ├── utils.ts       # Utility functions
@@ -123,8 +124,10 @@ Database migrations are handled differently for **development** and **production
 ---
 
 ## 📌 To-Do List
-✅ **Database communication example**
-✅ **Multi-window example**
+✅ **Database Communication Example**  
+✅ **App Update with electron-updater Example**  
+⬜ **Add Logger**  
+⬜ **Multi-Window Example**  
 
 ---
 
