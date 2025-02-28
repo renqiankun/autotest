@@ -1,6 +1,7 @@
 import fs from 'fs'
 /**
- * 代理文件系统模块
+ * 也可以ipcRenderer发送给主进程处理
+ * 此处抛出部分接口，方便快速开发
  */
 export const fsProxy = {
   readFile: fs.readFile,

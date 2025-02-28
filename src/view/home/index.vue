@@ -1,4 +1,7 @@
 <template>
+  <div style="margin-bottom: 10px;">
+    <el-button @click="checkVersion">检查app版本</el-button>
+  </div>
   <el-button @click="getUserListHand">查询用户</el-button>
   <el-button @click="addHand">新增用户</el-button>
   <el-table style="margin-top: 20px" stripe :data="tableData">
@@ -13,6 +16,8 @@
     </el-table-column>
   </el-table>
   <addOrUpdate @success="getUserListHand" ref="addRef"></addOrUpdate>
+
+  <checkAppVersion ref="checkRef"></checkAppVersion>
 </template>
 
 <script setup lang="ts">
@@ -20,6 +25,7 @@
   import { onMounted, ref } from 'vue'
   import addOrUpdate from './addOrUpdate.vue'
   import { ElMessage, ElMessageBox } from 'element-plus'
+  import checkAppVersion from './checkAppVersion.vue'
   onMounted(() => {
     getUserListHand()
   })
@@ -56,6 +62,17 @@
         getUserListHand()
       }
     })
+  }
+
+
+
+
+  let checkRef = ref()
+  /**
+   * 检查新版本 
+   */
+  const checkVersion = () => {
+    checkRef.value.init()
   }
 </script>
 

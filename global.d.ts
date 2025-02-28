@@ -27,12 +27,23 @@ interface fsProxy {
 }
 
 /**
+ * app更新
+ */
+interface AppUpdate {
+  onUpdateMsg: (callback: (data:{code:number,data?: any}) => void) => void
+  setUrl: (url: string) => void
+  checkUpdate: () => void
+  startDownload: () => void
+  quitAndInstall: () => void
+}
+/**
  * renderer注入electron
  */
 declare interface Window {
   electronAPI: {
-    queryDB: <T>(params: QueryDBType) => Promise<{code:number, data: any, msg: string}>
-    fs: fsProxy,
-    env:'development' | 'production'
+    queryDB: <T>(params: QueryDBType) => Promise<{ code: number; data: any; msg: string }>
+    fs: fsProxy
+    env: 'development' | 'production'
+    update: AppUpdate
   }
 }

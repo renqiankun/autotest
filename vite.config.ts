@@ -6,8 +6,8 @@ import electron, { ElectronOptions } from 'vite-plugin-electron'
 import { notBundle } from 'vite-plugin-electron/plugin'
 import pkg from './package.json'
 // import renderer from 'vite-plugin-electron-renderer'
-// 用于支持__dirname require等
-import esmShim from '@rollup/plugin-esm-shim'
+// 用于支持__dirname require __filename等，内部应该使用字符匹配，不精确
+// import esmShim from '@rollup/plugin-esm-shim'
 // import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
@@ -31,6 +31,7 @@ export default defineConfig(({ command, mode }: any) => {
                   entryFileNames: '[name].mjs', // 根据目录输出文件
                   chunkFileNames: '[name].mjs' // 分离的 chunk 文件
                 },
+                external: Object.keys(pkg.dependencies)
               }
             }
           }
@@ -39,7 +40,7 @@ export default defineConfig(({ command, mode }: any) => {
         {
           // entry: './electron/main/index.ts',
           vite: {
-            plugins: [notBundle()],
+            plugins: [ !isProduction && notBundle()],
             build: {
               // outDir: './dist-electron/main',
               rollupOptions: {
@@ -51,7 +52,7 @@ export default defineConfig(({ command, mode }: any) => {
                   chunkFileNames: '[name].js' // 分离的 chunk 文件
                 },
                 plugins: [
-                  esmShim() // 在Vite的Rollup构建配置中使用插件
+                  // esmShim() // 在Vite的Rollup构建配置中使用插件
                 ],
                 external: Object.keys(pkg.dependencies)
               }

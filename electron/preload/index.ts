@@ -1,5 +1,6 @@
 import { queryDB } from './modules/db'
 import { fsProxy } from './modules/fs'
+import {update} from './modules/update'
 import { contextBridge } from 'electron'
 /**
  * 抛出window.electronAPI
@@ -7,5 +8,6 @@ import { contextBridge } from 'electron'
 contextBridge.exposeInMainWorld('electronAPI', {
   queryDB: queryDB,
   env: process.env.NODE_ENV,
-  fs: fsProxy
+  fs: fsProxy,
+  update
 })

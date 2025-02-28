@@ -6,12 +6,24 @@
     "directories": {
         "output": "release/${version}"
     },
+    // 打包进 asar
     "files": [
         "assets/**/*",
         "dist/**/*",
         "dist-electron/**/*",
         "migrations/**/*",
         ".env.production"
+    ],
+     // 将 a 从asar 复制到外部目录(resource)
+    "extraResources": [
+    //  {
+      //  "from": "a",
+     //   "to": "a"
+     // }
+    ],
+     // 将 asar内部 目录提取(复制)到外部即resource/app.asar.unpacked目录
+    "asarUnpack": [
+      // "a/**/*",
     ],
     "electronDownload": {
         "mirror": "https://npmmirror.com/mirrors/electron/"

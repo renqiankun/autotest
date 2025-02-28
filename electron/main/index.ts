@@ -6,6 +6,11 @@ import  { app, BrowserWindow }  from 'electron'
 // 初始化数据库handler
 import { dbInit } from "./dbInit";
 import dotenv  from 'dotenv'
+import { getDirname } from './utils';
+import './auto-update/index'
+// import './auto-update/index'
+const __dirname = getDirname(import.meta.url)
+
 const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
 dotenv.config({ path: path.resolve(__dirname,'../../', envFile) });
 /**
